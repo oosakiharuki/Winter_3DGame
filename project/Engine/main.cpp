@@ -45,6 +45,9 @@ using namespace MyMath;
 #include "ModelManager.h"
 #include "SrvManager.h"
 
+#include "Player.h"
+
+
 //Windowsアプリのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -84,27 +87,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	spriteCommon = new SpriteCommon;
 	spriteCommon->Initialize(dxCommon);
 
-	std::vector<Sprite*> sprites;
+	//std::vector<Sprite*> sprites;
 
-	for (uint32_t i = 0; i < 1; ++i) {
-		Sprite* sprite = new Sprite();
-		//if (i == 1 || i == 3) {
-		//	sprite->Initialize(spriteCommon, "resource/monsterBall.png");
-		//}
-		//else {
-		sprite->Initialize(spriteCommon, "resource/uvChecker.png");
-		//}
-		Vector2 position[5] = {};
-		position[i].x += i * 200.0f;
-		sprite->SetPosition(position[i]);
+	//for (uint32_t i = 0; i < 1; ++i) {
+	//	Sprite* sprite = new Sprite();
+	//	//if (i == 1 || i == 3) {
+	//	//	sprite->Initialize(spriteCommon, "resource/monsterBall.png");
+	//	//}
+	//	//else {
+	//	sprite->Initialize(spriteCommon, "resource/uvChecker.png");
+	//	//}
+	//	Vector2 position[5] = {};
+	//	position[i].x += i * 200.0f;
+	//	sprite->SetPosition(position[i]);
 
-		sprites.push_back(sprite);
-	}
+	//	sprites.push_back(sprite);
+	//}
 
 
 	ModelManager::GetInstance()->Initialize(dxCommon);
 	ModelManager::GetInstance()->LoadModel("plane.obj");
 	ModelManager::GetInstance()->LoadModel("axis.obj");
+	ModelManager::GetInstance()->LoadModel("player.obj");
+	ModelManager::GetInstance()->LoadModel("teapot.obj");
+
 
 	Object3dCommon* object3dCommon = nullptr;
 	object3dCommon = new Object3dCommon();
@@ -129,30 +135,40 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//model = new Model();
 	//model->Initialize(modelCommon);
 
-	std::vector <Object3d*> objects;
+	//std::vector <Object3d*> objects;
 
 
-	Vector3 position[2] = {};
+	Player* player = new Player();
+	player->Initialize(object3dCommon,spriteCommon, winApp_);
 
-	for (uint32_t i = 0; i < 2; ++i) {
 
-		Object3d* object3d = new Object3d();
-		//object3d->SetModel(model);
-	
-		if (i == 0) {
-			object3d->SetModelFile("plane.obj");
-			object3d->Initialize(object3dCommon);
-		}
-		else {
-			object3d->SetModelFile("axis.obj");
-			object3d->Initialize(object3dCommon);
-		}
+	//Vector3 position[2] = {};
 
-		position[i].x += i * 3.0f;
-		object3d->SetTranslate(position[i]);
+	//for (uint32_t i = 0; i < 2; ++i) {
 
-		objects.push_back(object3d);
-	}
+	//	Object3d* object3d = new Object3d();
+	//	//object3d->SetModel(model);
+	//
+	//	if (i == 0) {
+	//		object3d->SetModelFile("plane.obj");
+	//		object3d->Initialize(object3dCommon);
+	//	}
+	//	else {
+	//		object3d->SetModelFile("axis.obj");
+	//		object3d->Initialize(object3dCommon);
+	//	}
+
+	//	position[i].x += i * 3.0f;
+	//	object3d->SetTranslate(position[i]);
+
+	//	objects.push_back(object3d);
+	//}
+
+
+
+
+
+
 
 	//モデルの読み込み
 	//ModelData modelData = LoadObjFile("resource", "plane.obj");
@@ -185,71 +201,73 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 
 
-			//Vector2 position;
-			//float rotation;
-			Vector4 color;
-			Vector2 size;
+			////Vector2 position;
+			////float rotation;
+			//Vector4 color;
+			//Vector2 size;
 
-			for (Sprite* sprite : sprites) {
-				sprite->Update();
-
-
-				//position = sprite->GetPosition();
-				//position.x += 0.1f;
-				//position.y += 0.1f;
-				//sprite->SetPosition(position);
-
-				//rotation = sprite->GetRotate();
-				//rotation += 0.01f;
-				//sprite->SetRotate(rotation);
-
-				color = sprite->GetColor();
-				//color.x += 0.01f;
-				//if (color.x > 1.0f) {
-				//	color.x -= 1.0f;
-				//}
-				sprite->SetColor(color);
-
-				size = sprite->GetSize();
-				//size.x -= 1.1f;
-				//size.y -= 1.1f;
-				sprite->SetSize(size);
-			}
+			//for (Sprite* sprite : sprites) {
+			//	sprite->Update();
 
 
-			Vector3 positionOBJ;
-			Vector3 rotationOBJ;
-			Vector3 rotationOBJ2;
-			Vector3 sizeOBJ;
+			//	//position = sprite->GetPosition();
+			//	//position.x += 0.1f;
+			//	//position.y += 0.1f;
+			//	//sprite->SetPosition(position);
 
-			for (Object3d* object3d : objects) {
-				object3d->Update();
+			//	//rotation = sprite->GetRotate();
+			//	//rotation += 0.01f;
+			//	//sprite->SetRotate(rotation);
 
-				positionOBJ = object3d->GetTranslate();
-				
-				object3d->SetTranslate(positionOBJ);
-				
-				rotationOBJ = object3d->GetRotate();
-				
-				object3d->SetRotate(rotationOBJ);
+			//	color = sprite->GetColor();
+			//	//color.x += 0.01f;
+			//	//if (color.x > 1.0f) {
+			//	//	color.x -= 1.0f;
+			//	//}
+			//	sprite->SetColor(color);
+
+			//	size = sprite->GetSize();
+			//	//size.x -= 1.1f;
+			//	//size.y -= 1.1f;
+			//	sprite->SetSize(size);
+			//}
 
 
-				sizeOBJ = object3d->GetScale();
+			//Vector3 positionOBJ;
+			//Vector3 rotationOBJ;
+			//Vector3 rotationOBJ2;
+			//Vector3 sizeOBJ;
 
-				object3d->SetScale(sizeOBJ);
+			//for (Object3d* object3d : objects) {
+			//	object3d->Update();
 
-			}
-				
-			rotationOBJ = objects[0]->GetRotate();
-			rotationOBJ.y += 0.05f;
-			objects[0]->SetRotate(rotationOBJ);
+			//	positionOBJ = object3d->GetTranslate();
+			//	
+			//	object3d->SetTranslate(positionOBJ);
+			//	
+			//	rotationOBJ = object3d->GetRotate();
+			//	
+			//	object3d->SetRotate(rotationOBJ);
 
-			rotationOBJ2 = objects[1]->GetRotate();
-			rotationOBJ2.z += 0.1f;			
-			objects[1]->SetRotate(rotationOBJ2);
+
+			//	sizeOBJ = object3d->GetScale();
+
+			//	object3d->SetScale(sizeOBJ);
+
+			//}
+			//	
+			//rotationOBJ = objects[0]->GetRotate();
+			//rotationOBJ.y += 0.05f;
+			//objects[0]->SetRotate(rotationOBJ);
+
+			//rotationOBJ2 = objects[1]->GetRotate();
+			//rotationOBJ2.z += 0.1f;			
+			//objects[1]->SetRotate(rotationOBJ2);
 
 
 			camera->Update();
+
+			player->Update();
 
 
 
@@ -391,16 +409,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			
 			object3dCommon->Command();
 			
-			for (Object3d* object3d : objects) {
-				object3d->Draw();
-			}
+			//for (Object3d* object3d : objects) {
+			//	object3d->Draw();
+			//}
+
+			player->Draw();
 
 			//UI
 			spriteCommon->Command();
 
-			for (Sprite* sprite : sprites) {
-				sprite->Draw();
-			}
+			//for (Sprite* sprite : sprites) {
+			//	sprite->Draw();
+			//}
+
+			player->Draw2D();
+
 			dxCommon->PostDraw();
 		}
 	}
@@ -427,18 +450,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete srvManager;
 
 	delete spriteCommon;
-	for (Sprite* sprite : sprites) {
-		delete sprite;
-	}
+	//for (Sprite* sprite : sprites) {
+	//	delete sprite;
+	//}
 
 	delete object3dCommon;
-	for (Object3d* object3d : objects) {
-		delete object3d;
-	}
+	//for (Object3d* object3d : objects) {
+	//	delete object3d;
+	//}
 
 	delete modelCommon;
 	//delete model;
 
+
+	delete player;
 
 	return 0;
 }
