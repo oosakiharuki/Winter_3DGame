@@ -10,7 +10,7 @@
 class Player{
 public:
 	~Player();
-	void Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon,WinApp* winApp);
+	void Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon,Input* input);
 	void Update();
 	void Attack();
 	void Draw();

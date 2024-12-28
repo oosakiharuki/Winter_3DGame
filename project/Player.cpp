@@ -9,10 +9,8 @@ Player::~Player() {
 	}
 }
 
-void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , WinApp* winApp){
-	winApp_ = winApp;
-	input_ = new Input();
-	input_->Initialize(winApp_);
+void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , Input* input){
+	input_ = input;
 
 	sprite = new Sprite();
 	sprite->Initialize(spriteCommon, "resource/Hp.png");
