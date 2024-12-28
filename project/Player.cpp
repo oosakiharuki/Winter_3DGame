@@ -4,6 +4,9 @@
 Player::~Player() {
 	delete object3d;
 	delete sprite;
+	for (PlayerBullet* bullet : bullets_) {
+		delete bullet;
+	}
 }
 
 void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , WinApp* winApp){
@@ -14,10 +17,10 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 	sprite = new Sprite();
 	sprite->Initialize(spriteCommon, "resource/Hp.png");
 
+	ObjCommon = object3dCommon;
 	object3d = new Object3d();
-	//ModelManager::GetInstance()->LoadModel("plane.obj");
 	object3d->SetModelFile("player.obj");
-	object3d->Initialize(object3dCommon);
+	object3d->Initialize(ObjCommon);
 }
 
 void Player::Update() {
@@ -95,15 +98,54 @@ void Player::Update() {
 		}
 	}
 
+	//rotation.y += 0.1f;
+
 	object3d->SetRotate(rotation);
 
 	size = object3d->GetScale();
 
 	object3d->SetScale(size);
+
+	Attack();
+	for(PlayerBullet* bullet : bullets_) {
+		bullet->Update();
+	}
+
+	bullets_.remove_if([](PlayerBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
+
 }
+
+void Player::Attack() {
+	if (input_->TriggerKey(DIK_SPACE)) {
+
+		const float kBulletSpeed = 0.2f;
+		Vector3 velocity(0, 0, kBulletSpeed);
+		Matrix4x4 worldMatrix = object3d->GetWorld();
+
+		velocity = MyMath::TransformNormal(velocity, worldMatrix);
+		//velocity.y = 0.0f;
+
+		PlayerBullet* newBullet = new PlayerBullet();
+		newBullet->Initialize(ObjCommon, position, velocity, object3d->GetRotate());
+		
+
+
+		bullets_.push_back(newBullet);
+	}
+}
+
 
 void Player::Draw() {
 	object3d->Draw();
+	for (PlayerBullet* bullet : bullets_) {
+		bullet->Draw();
+	}
 }
 
 void Player::Draw2D() {
