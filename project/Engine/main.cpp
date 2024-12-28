@@ -109,7 +109,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ModelManager::GetInstance()->LoadModel("plane.obj");
 	ModelManager::GetInstance()->LoadModel("axis.obj");
 	ModelManager::GetInstance()->LoadModel("player.obj");
-	ModelManager::GetInstance()->LoadModel("teapot.obj");
+	ModelManager::GetInstance()->LoadModel("bullet.obj");
 
 
 	Object3dCommon* object3dCommon = nullptr;

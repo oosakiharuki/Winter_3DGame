@@ -74,4 +74,7 @@ namespace MyMath {
 	Matrix4x4 MakePerspectiveFovMatrix(float forY, float aspectRatio, float nearClip, float farClip);
 
 	Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float nearClip, float farClip);
+
+	Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
+
 }

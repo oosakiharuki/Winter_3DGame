@@ -3,13 +3,16 @@
 #include "Object3d.h"
 #include "Sprite.h"
 #include "Input.h"
+#include "PlayerBullet.h"
 
+//#include <list>
 
 class Player{
 public:
 	~Player();
 	void Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon,WinApp* winApp);
 	void Update();
+	void Attack();
 	void Draw();
 	void Draw2D();
 	
@@ -27,4 +30,6 @@ private:
 
 	Input* input_ = nullptr;
 	WinApp* winApp_ = nullptr;
+	Object3dCommon* ObjCommon = nullptr;
+	std::list<PlayerBullet*> bullets_;
 };

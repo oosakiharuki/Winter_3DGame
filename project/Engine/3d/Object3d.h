@@ -33,6 +33,7 @@ public:
 	const Vector3& GetScale() const { return transform.scale; }
 	const Vector3& GetRotate() const { return transform.rotate; }
 	const Vector3& GetTranslate()const { return transform.translate; }
+	const Matrix4x4& GetWorld() const { return worldMatrix; }
 
 private:
 	Object3dCommon* object3dCommon = nullptr;
@@ -50,9 +51,9 @@ private:
 
 	Transform transform;
 	Transform cameraTransform;
-
-
 	Transform transformL;
+
+	Matrix4x4 worldMatrix;
 
 	Model* model = nullptr;
 	Camera* camera = nullptr;

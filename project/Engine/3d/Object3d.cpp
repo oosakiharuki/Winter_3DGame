@@ -41,7 +41,7 @@ void Object3d::Initialize(Object3dCommon* object3dCommon_) {
 void Object3d::Update() {
 
 	//モデル
-	Matrix4x4 worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);	
+	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);	
 	Matrix4x4 WorldViewProjectionMatrix;
 
 	if (camera) {
