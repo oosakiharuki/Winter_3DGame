@@ -9,10 +9,8 @@ Player::~Player() {
 	}
 }
 
-void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , WinApp* winApp){
-	winApp_ = winApp;
-	input_ = new Input();
-	input_->Initialize(winApp_);
+void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , Input* input){
+	input_ = input;
 
 	sprite = new Sprite();
 	sprite->Initialize(spriteCommon, "resource/Hp.png");
@@ -21,6 +19,8 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 	object3d = new Object3d();
 	object3d->SetModelFile("player.obj");
 	object3d->Initialize(ObjCommon);
+
+	isFinish_ = false;
 }
 
 void Player::Update() {
@@ -118,6 +118,10 @@ void Player::Update() {
 		}
 		return false;
 	});
+
+	if(input_->TriggerKey(DIK_8)) {
+		isFinish_ = true;
+	}
 
 }
 
