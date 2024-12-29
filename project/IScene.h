@@ -5,7 +5,8 @@
 #include "Input.h"
 
 enum SCENE{
-	GAME
+	Title,
+	GAME,
 };
 
 

@@ -1,10 +1,10 @@
 #include "GameManager.h"
 
 GameManager::GameManager(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
-	sceneArr_[GAME] = std::make_unique<GameScene>();
+	sceneArr_[Title] = new TitleScene();
 
 	prevSceneNo_ = 0;
-	currentSceneNo_ = GAME;
+	currentSceneNo_ = Title;
 
 	spriteCommon_ = spriteCommon;
 	objCommon_ = objCommon;
@@ -12,11 +12,26 @@ GameManager::GameManager(SpriteCommon* spriteCommon, Object3dCommon* objCommon, 
 }
 
 GameManager::~GameManager() {
-
+	for (uint32_t i = 0; i < SceneNum; ++i) {
+		delete sceneArr_[i];
+	}
 }
 
-void GameManager::Initialize() {
-	sceneArr_[currentSceneNo_]->Initialize(spriteCommon_, objCommon_, input_);
+void GameManager::SceneChange(int prev, int current) {
+
+	delete sceneArr_[prev];
+	sceneArr_[prev] = nullptr;
+
+	//scene_ = current;
+	switch (current)
+	{
+	case Title:
+		sceneArr_[current] = new TitleScene();
+		break;
+	case GAME:
+		sceneArr_[current] = new GameScene();
+		break;
+	}
 }
 
 
@@ -26,6 +41,7 @@ void GameManager::Update() {
 	currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
 
 	if (prevSceneNo_ != currentSceneNo_) {
+		SceneChange(prevSceneNo_,currentSceneNo_);
 		sceneArr_[currentSceneNo_]->Initialize(spriteCommon_, objCommon_, input_);
 	}
 

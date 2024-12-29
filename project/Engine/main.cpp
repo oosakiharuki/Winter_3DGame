@@ -79,9 +79,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	modelCommon->Initialize(dxCommon);
 
 
-	GameManager* gameScene = new GameManager(spriteCommon,object3dCommon, input_);
-	gameScene->Initialize();
 
+	GameManager* gameScene = nullptr;
+	
+	gameScene = new GameManager(spriteCommon,object3dCommon, input_);
+	//gameScene->Initialize();
 
 	//描画させるもの
 	bool IsSphere = true;
@@ -95,9 +97,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		else {
 			//ゲームの処理
-			
-			gameScene->Update();
 
+			gameScene->Update();
+			
 
 			ImGui_ImplDX12_NewFrame();
 			ImGui_ImplWin32_NewFrame();
@@ -112,7 +114,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//描画開始
 			dxCommon->ProDraw();
-
+			
 			gameScene->Draw();
 
 			//描画終了

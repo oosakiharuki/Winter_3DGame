@@ -3,7 +3,7 @@
 #include <memory>
 #include "IScene.h"
 #include "GameScene.h"//geme
-//title
+#include "TitleScene.h"//title
 //clear
 //gameover
 
@@ -13,13 +13,17 @@ public:
 	GameManager(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input);
 	~GameManager();
 
-	void Initialize();
+
 	void Update();
 	void Draw();
 
 private:
+	
+	void SceneChange(int prev,int current);//シーン入れ替え
 
-	std::unique_ptr<IScene> sceneArr_[1];
+	IScene* sceneArr_[2];
+	uint32_t SceneNum = 2;
+
 
 	int currentSceneNo_;//現在シーン
 	int prevSceneNo_;//前シーン

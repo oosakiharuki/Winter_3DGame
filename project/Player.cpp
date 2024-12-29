@@ -19,6 +19,8 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 	object3d = new Object3d();
 	object3d->SetModelFile("player.obj");
 	object3d->Initialize(ObjCommon);
+
+	isFinish_ = false;
 }
 
 void Player::Update() {
@@ -116,6 +118,10 @@ void Player::Update() {
 		}
 		return false;
 	});
+
+	if(input_->TriggerKey(DIK_8)) {
+		isFinish_ = true;
+	}
 
 }
 

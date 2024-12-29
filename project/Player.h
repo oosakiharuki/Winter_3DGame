@@ -16,6 +16,8 @@ public:
 	void Draw();
 	void Draw2D();
 	
+	bool Finish() const { return isFinish_; }
+
 private:
 	Transform tarnsform;
 	uint32_t textureHandle = 0u;
@@ -32,4 +34,6 @@ private:
 	WinApp* winApp_ = nullptr;
 	Object3dCommon* ObjCommon = nullptr;
 	std::list<PlayerBullet*> bullets_;
+
+	bool isFinish_ = false;
 };
