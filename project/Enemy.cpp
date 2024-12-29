@@ -7,15 +7,13 @@ Enemy::~Enemy() {
 
 void Enemy::Initialize(Object3dCommon* object3dCommon, const Vector3& position) {
 	
-	
 	ObjCommon = object3dCommon;
 	object3d = new Object3d();
-	object3d->SetModelFile("axis.obj");
+	object3d->SetModelFile("enemy.obj");
 	object3d->Initialize(ObjCommon);
 
 	this->position = position;
 	object3d->SetTranslate(position);
-
 
 }
 
@@ -29,7 +27,7 @@ void  Enemy::Update() {
 		position.z -= 0.1f;
 		object3d->SetTranslate(position);
 
-		if (position.z < 0) {
+		if (position.z < 10.0f) {
 			action = Action::stop;
 		}
 
@@ -48,4 +46,8 @@ void  Enemy::Update() {
 
 void Enemy::Draw() {
 	object3d->Draw();
+}
+
+void Enemy::OnCollision() {
+	isDead_ = true;
 }

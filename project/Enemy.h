@@ -14,6 +14,10 @@ public:
 	void Update();
 	void Draw();
 
+	void OnCollision();
+	bool IsDead() { return isDead_; }
+	Vector3 GetPosition() { return position; };
+
 private:
 	Transform tarnsform;
 
@@ -26,5 +30,5 @@ private:
 	Action action;
 
 	Object3dCommon* ObjCommon = nullptr;
-	std::stringstream enemyPopCommands;
+	bool isDead_ = false;
 };

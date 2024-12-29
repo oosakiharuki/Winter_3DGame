@@ -16,6 +16,10 @@ public:
 	void Draw();
 	void Draw2D();
 	
+	void OnCollision();
+	std::list<PlayerBullet*> GetBullets() { return bullets_; }
+	Vector3 GetPosition() { return position; };
+
 	bool Finish() const { return isFinish_; }
 
 private:

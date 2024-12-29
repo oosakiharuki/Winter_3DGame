@@ -155,3 +155,7 @@ void Player::Draw() {
 void Player::Draw2D() {
 	sprite->Draw();
 }
+
+void Player::OnCollision() {
+
+}
