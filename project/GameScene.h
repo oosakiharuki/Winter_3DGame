@@ -25,13 +25,23 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void CheckAllCollisions();
+
+	void EnemyBorn(Vector3 position);
+	void LoadEnemyPopData();
+	void UpdateEnemyPop();
+
 private:
 	Input* input_ = nullptr;
 	Object3dCommon* object3dCommon_ = nullptr;
-	SpriteCommon* spriteCommon_ = nullptr
-		;
+	SpriteCommon* spriteCommon_ = nullptr;
+
 	Camera* camera = nullptr;
 	
 	Player* player = nullptr;
 	std::list<Enemy*> enemies;
+	std::stringstream enemyPopCommands;
+	bool WaitFlag = false;
+	int32_t waitTimer;
+	bool isBornFinish = false;
 };

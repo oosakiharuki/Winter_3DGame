@@ -8,6 +8,8 @@ public:
 	void Update();
 	void Draw();
 	bool IsDead() { return isDead_; }
+	void OnCollision();
+	Vector3 GetPosition() { return position; };
 
 private:
 	Object3d* object;
