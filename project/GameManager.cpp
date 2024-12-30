@@ -31,9 +31,17 @@ void GameManager::SceneChange(int prev, int current) {
 	case GAME:
 		sceneArr_[current] = new GameScene();
 		break;
+	case Clear:
+		sceneArr_[current] = new ClearScene();
+		break;
+	case GameOver:
+		sceneArr_[current] = new GameOverScene();
+		break;
 	}
 }
-
+void GameManager::Initialize() {
+	sceneArr_[currentSceneNo_]->Initialize(spriteCommon_, objCommon_, input_);
+}
 
 void GameManager::Update() {
 

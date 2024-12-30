@@ -8,6 +8,7 @@ GameScene::~GameScene() {
 	for (Enemy* enemy : enemies) {
 		delete enemy;
 	}
+	delete fead_;
 }
 
 void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -35,6 +36,9 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 	
 
 	LoadEnemyPopData();
+
+	fead_ = new Fead();
+	fead_->Initialize(spriteCommon_,"resource/Fead.png");
 }
 
 void GameScene::Update() {
@@ -58,9 +62,23 @@ void GameScene::Update() {
 		return false;
 	});
 	
+	fead_->Update();
 	//SceneChange
-	if (player->Finish()) {
-		sceneNo = SCENE::Title;
+	if (player->FinishWin()) {
+		fead_->ChangeSpriteFile("resource/FeadWin.png");
+		fead_->StartFead();
+	}
+	else if (player->FinishLoze()) {
+		fead_->StartFead();
+	}
+
+
+	if (fead_->SceneChange() && player->FinishWin()) {
+		sceneNo = SCENE::Clear;
+	}
+
+	if (fead_->SceneChange() && player->FinishLoze()) {
+		sceneNo = SCENE::GameOver;
 	}
 }
 
@@ -82,6 +100,7 @@ void GameScene::Draw() {
 	spriteCommon_->Command();
 
 	player->Draw2D();
+	fead_->Draw();
 
 }
 

@@ -7,6 +7,8 @@
 enum SCENE{
 	Title,
 	GAME,
+	Clear,
+	GameOver,
 };
 
 

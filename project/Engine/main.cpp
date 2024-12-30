@@ -83,7 +83,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	GameManager* gameScene = nullptr;
 	
 	gameScene = new GameManager(spriteCommon,object3dCommon, input_);
-	//gameScene->Initialize();
+	gameScene->Initialize();
 
 	//描画させるもの
 	bool IsSphere = true;

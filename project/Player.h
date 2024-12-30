@@ -20,7 +20,8 @@ public:
 	std::list<PlayerBullet*> GetBullets() { return bullets_; }
 	Vector3 GetPosition() { return position; };
 
-	bool Finish() const { return isFinish_; }
+	bool FinishWin() const { return isClear_; }
+	bool FinishLoze() const { return isGameOver_; }
 
 private:
 	Transform tarnsform;
@@ -39,5 +40,6 @@ private:
 	Object3dCommon* ObjCommon = nullptr;
 	std::list<PlayerBullet*> bullets_;
 
-	bool isFinish_ = false;
+	bool isClear_ = false;
+	bool isGameOver_ = false;
 };
