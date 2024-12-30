@@ -144,3 +144,8 @@ void Sprite::Draw() {
 	spriteCommon_->GetDirectXCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetSrvHandleGPU(filePath));
 	spriteCommon_->GetDirectXCommon()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
+
+void Sprite::SetSprite(std::string filePath) {
+	TextureManager::GetInstance()->LoadTexture(filePath);
+	this->filePath = filePath;
+}

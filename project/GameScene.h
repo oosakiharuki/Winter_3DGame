@@ -18,6 +18,8 @@
 #include "Player.h"
 #include "Enemy.h"
 
+#include "Fead.h"
+
 class GameScene : public IScene{
 public:
 	~GameScene() override;
@@ -44,4 +46,6 @@ private:
 	bool WaitFlag = false;
 	int32_t waitTimer;
 	bool isBornFinish = false;
+
+	Fead* fead_ = nullptr;
 };

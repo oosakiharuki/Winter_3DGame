@@ -1,10 +1,10 @@
-#include "TitleScene.h"
+#include "GameOverScene.h"
 
-TitleScene::~TitleScene() {
+GameOverScene::~GameOverScene() {
 	delete fead_;
 }
 
-void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
+void GameOverScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
 	this->spriteCommon_ = spriteCommon;
 	this->object3dCommon_ = objCommon;
 	this->input_ = input;
@@ -13,7 +13,7 @@ void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommo
 	fead_->Initialize(spriteCommon_, "resource/Fead.png");
 }
 
-void TitleScene::Update() {
+void GameOverScene::Update() {
 	input_->Update();
 	fead_->Update();
 
@@ -26,6 +26,6 @@ void TitleScene::Update() {
 	}
 }
 
-void TitleScene::Draw() {
+void GameOverScene::Draw() {
 	fead_->Draw();
 }

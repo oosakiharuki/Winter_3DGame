@@ -3,9 +3,9 @@
 #include "Input.h"
 #include "Fead.h"
 
-class TitleScene : public IScene {
+class GameOverScene : public IScene {
 public:
-	~TitleScene() override;
+	~GameOverScene() override;
 	void Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) override;
 	void Update() override;
 	void Draw() override;

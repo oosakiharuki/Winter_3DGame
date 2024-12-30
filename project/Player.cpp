@@ -20,7 +20,8 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 	object3d->SetModelFile("player.obj");
 	object3d->Initialize(ObjCommon);
 
-	isFinish_ = false;
+	isClear_ = false;
+	isGameOver_ = false;
 }
 
 void Player::Update() {
@@ -120,7 +121,11 @@ void Player::Update() {
 	});
 
 	if(input_->TriggerKey(DIK_8)) {
-		isFinish_ = true;
+		isClear_ = true;
+	}
+
+	if (input_->TriggerKey(DIK_9)) {
+		isGameOver_ = true;
 	}
 
 }
