@@ -30,5 +30,8 @@ private:
 	Action action;
 
 	Object3dCommon* ObjCommon = nullptr;
+
 	bool isDead_ = false;
+	bool isHit = false;
+	uint32_t hp = 10;
 };

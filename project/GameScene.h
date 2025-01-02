@@ -20,6 +20,7 @@
 
 #include "Fead.h"
 #include "Skydorm.h"
+#include "Wall.h"
 
 class GameScene : public IScene{
 public:
@@ -40,6 +41,8 @@ private:
 	SpriteCommon* spriteCommon_ = nullptr;
 
 	Camera* camera = nullptr;
+	int shakeX;
+	int shakeZ;
 	
 	Player* player = nullptr;
 	std::list<Enemy*> enemies;
@@ -50,4 +53,9 @@ private:
 
 	Fead* fead_ = nullptr;
 	Skydorm* skydorm_ = nullptr;
+
+	Wall* wall_ = nullptr;
+
+	bool isClear_ = false;
+	bool isGameOver_ = false;
 };

@@ -13,8 +13,7 @@ void PlayerBullet::Initialize(Object3dCommon* object3dCommon, const Vector3& pos
 	object->SetTranslate(position);
 
 	this->velocity = velocity;
-	this->rotation = rotate;
-	//rotation.x = 0.0f;
+	this->rotation = rotate;	
 	object->SetRotate(rotation);
 }
 
@@ -29,9 +28,9 @@ void PlayerBullet::Update(){
 
 	object->SetTranslate(position);
 
-	//rotation = object->GetRotate();
-
-	//object->SetRotate(rotation);
+	rotation = object->GetRotate();
+	rotation.x = 0.0f;
+	object->SetRotate(rotation);
 
 	lifeTimer -= deltaTimer;
 	if (lifeTimer < 0.0f) {

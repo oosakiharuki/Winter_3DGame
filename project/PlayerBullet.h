@@ -20,6 +20,6 @@ private:
 
 
 	bool isDead_ = false;
-	float lifeTimer = 5.0f;
+	float lifeTimer = 1.0f;
 	const float deltaTimer = 1.0f / 60.0f;
 };

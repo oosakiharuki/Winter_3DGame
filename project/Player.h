@@ -20,10 +20,12 @@ public:
 	std::list<PlayerBullet*> GetBullets() { return bullets_; }
 	Vector3 GetPosition() { return position; };
 
-	bool FinishWin() const { return isClear_; }
-	bool FinishLoze() const { return isGameOver_; }
 
 private:
+	Input* input_ = nullptr;
+	WinApp* winApp_ = nullptr;
+	Object3dCommon* ObjCommon = nullptr;
+
 	Transform tarnsform;
 	uint32_t textureHandle = 0u;
 
@@ -33,13 +35,14 @@ private:
 	Vector3 rotation;
 	Vector3 size;
 
+	const float kMoveX = 7.0f;
+	const float kMoveZNear = -2.0f;
+	const float kMoveZFar = 10.0f;
+
 	Sprite* sprite = nullptr;
 
-	Input* input_ = nullptr;
-	WinApp* winApp_ = nullptr;
-	Object3dCommon* ObjCommon = nullptr;
-	std::list<PlayerBullet*> bullets_;
 
-	bool isClear_ = false;
-	bool isGameOver_ = false;
+	std::list<PlayerBullet*> bullets_;
+	float distanceTime = 0.0f;
+
 };

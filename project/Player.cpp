@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <algorithm>
 
 Player::~Player() {
 	delete object3d;
@@ -19,8 +20,6 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 	object3d->SetModelFile("player.obj");
 	object3d->Initialize(ObjCommon);
 
-	isClear_ = false;
-	isGameOver_ = false;
 }
 
 void Player::Update() {
@@ -29,11 +28,11 @@ void Player::Update() {
 	input_->Update();
 
 	if (input_->PushKey(DIK_W)) {
-		position.y += 0.1f;
+		position.z += 0.1f;
 	}
 
 	if (input_->PushKey(DIK_S)) {
-		position.y -= 0.1f;
+		position.z -= 0.1f;
 	}
 
 	if (input_->PushKey(DIK_A)) {
@@ -44,7 +43,10 @@ void Player::Update() {
 		position.x += 0.1f;
 	}
 
+	
 
+	position.x = std::clamp(position.x, -kMoveX - position.z / 4, kMoveX + position.z / 4);
+	position.z = std::clamp(position.z, kMoveZNear, kMoveZFar);
 
 
 	object3d->SetTranslate(position);
@@ -118,33 +120,32 @@ void Player::Update() {
 		}
 		return false;
 	});
-
-	if(input_->TriggerKey(DIK_8)) {
-		isClear_ = true;
-	}
-
-	if (input_->TriggerKey(DIK_9)) {
-		isGameOver_ = true;
-	}
+	
 
 }
 
 void Player::Attack() {
-	if (input_->TriggerKey(DIK_SPACE)) {
+	if (input_->PushKey(DIK_SPACE) && distanceTime == 0) {
 
-		const float kBulletSpeed = 0.2f;
+		const float kBulletSpeed = 0.3f;
 		Vector3 velocity(0, 0, kBulletSpeed);
 		Matrix4x4 worldMatrix = object3d->GetWorld();
 
 		velocity = MyMath::TransformNormal(velocity, worldMatrix);
-		//velocity.y = 0.0f;
+		velocity.y = 0.0f;
 
 		PlayerBullet* newBullet = new PlayerBullet();
 		newBullet->Initialize(ObjCommon, position, velocity, object3d->GetRotate());
-		
-
 
 		bullets_.push_back(newBullet);
+
+		distanceTime = 0.1f;
+	}
+	else {
+		distanceTime -= 1.0f / 60.0f;
+		if (distanceTime < 0) {
+			distanceTime = 0;
+		}
 	}
 }
 
@@ -161,5 +162,5 @@ void Player::Draw2D() {
 }
 
 void Player::OnCollision() {
-
+	
 }

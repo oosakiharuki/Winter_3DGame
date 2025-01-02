@@ -27,7 +27,7 @@ void  Enemy::Update() {
 		position.z -= 0.1f;
 		object3d->SetTranslate(position);
 
-		if (position.z < 10.0f) {
+		if (position.z < -5.0f) {
 			action = Action::stop;
 		}
 
@@ -37,11 +37,19 @@ void  Enemy::Update() {
 		
 
 
+
+
 		break;
 	}
 
+	if (isHit) {
+		hp--;
+		isHit = false;
+	}
 
-
+	if (!hp) {
+		isDead_ = true;
+	}
 }
 
 void Enemy::Draw() {
@@ -49,5 +57,5 @@ void Enemy::Draw() {
 }
 
 void Enemy::OnCollision() {
-	isDead_ = true;
+	isHit = true;
 }
