@@ -25,7 +25,7 @@ void Fead::Update() {
 		if (startFead) {
 			sprite->SetSprite(spriteFile_);
 			color = sprite->GetColor();
-			color.s += 0.01f;
+			color.s += 0.025f;
 			sprite->SetColor(color);
 
 			if (sprite->GetColor().s > 1.0f) {
@@ -38,7 +38,7 @@ void Fead::Update() {
 	case Status::FeadOut:
 		sprite->Update();
 		color = sprite->GetColor();
-		color.s -= 0.01f;
+		color.s -= 0.025f;
 		sprite->SetColor(color);
 
 		if (sprite->GetColor().s < 0.0f) {
@@ -52,8 +52,6 @@ void Fead::Update() {
 }
 
 void Fead::Draw() {
-	spriteCommon_->Command();
-
 	sprite->Draw();
 }
 

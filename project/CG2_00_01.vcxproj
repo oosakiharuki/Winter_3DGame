@@ -138,6 +138,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="Skydorm.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="IScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="Skydorm.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
