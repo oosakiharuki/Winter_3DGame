@@ -1,25 +1,14 @@
-//#include<Windows.h>//winapp
 #include <cstdint>
-//#include <string>
 #include<format>
 
 #include<cassert>
 
 #include <dxgidebug.h>
 
-//#include <dxcapi.h>
-
-
-
-
-
 #include"externals/imgui/imgui.h"
 #include"externals/imgui/imgui_impl_dx12.h"
 #include"externals/imgui/imgui_impl_win32.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-#include "MyMath.h"
-using namespace MyMath;
 
 #pragma comment(lib,"dxguid.lib")
 
@@ -85,10 +74,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	gameScene = new GameManager(spriteCommon,object3dCommon, input_);
 	gameScene->Initialize();
 
-	//描画させるもの
-	bool IsSphere = true;
-	bool IsModel[2] = {true,true};
-	bool IsSprite = true;
 
 	//ウィンドウの×ボタンが押されるまでループ
 	while (true) {
@@ -99,7 +84,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//ゲームの処理
 
 			gameScene->Update();
-			
+
 
 			ImGui_ImplDX12_NewFrame();
 			ImGui_ImplWin32_NewFrame();
@@ -122,12 +107,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 	}
 
-
-
 	ImGui_ImplDX12_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
-
 
 	delete input_;
 	winApp_->Finalize();
@@ -139,16 +121,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ModelManager::GetInstance()->Finalize();
 
 	delete dxCommon;
-
-
 	delete srvManager;
-
 	delete spriteCommon;
-
 	delete object3dCommon;
-
 	delete modelCommon;
-
 	delete gameScene;
 
 	return 0;

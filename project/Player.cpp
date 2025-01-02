@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "ModelManager.h"
 
 Player::~Player() {
 	delete object3d;

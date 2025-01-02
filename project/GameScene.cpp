@@ -9,6 +9,7 @@ GameScene::~GameScene() {
 		delete enemy;
 	}
 	delete fead_;
+	delete skydorm_;
 }
 
 void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -39,13 +40,16 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 
 	fead_ = new Fead();
 	fead_->Initialize(spriteCommon_,"resource/Fead.png");
+
+	skydorm_ = new Skydorm();
+	skydorm_->Initialize(object3dCommon_, camera,"skydorm.obj");
 }
 
 void GameScene::Update() {
 
 	camera->Update();
 	player->Update();
-;
+
 	UpdateEnemyPop();
 
 	for (Enemy* enemy : enemies) {
@@ -63,6 +67,7 @@ void GameScene::Update() {
 	});
 	
 	fead_->Update();
+	skydorm_->Update();
 	//SceneChange
 	if (player->FinishWin()) {
 		fead_->ChangeSpriteFile("resource/FeadWin.png");
@@ -91,6 +96,7 @@ void GameScene::Draw() {
 	//object
 	object3dCommon_->Command();
 
+	skydorm_->Draw();
 	player->Draw();
 	for (Enemy* enemy : enemies) {
 		enemy->Draw();

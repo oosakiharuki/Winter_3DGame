@@ -19,6 +19,7 @@
 #include "Enemy.h"
 
 #include "Fead.h"
+#include "Skydorm.h"
 
 class GameScene : public IScene{
 public:
@@ -48,4 +49,5 @@ private:
 	bool isBornFinish = false;
 
 	Fead* fead_ = nullptr;
+	Skydorm* skydorm_ = nullptr;
 };

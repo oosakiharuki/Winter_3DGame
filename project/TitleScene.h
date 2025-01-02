@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include "Input.h"
 #include "Fead.h"
+#include "Skydorm.h"
 
 class TitleScene : public IScene {
 public:
@@ -14,4 +15,7 @@ private:
 	Object3dCommon* object3dCommon_ = nullptr;
 	SpriteCommon* spriteCommon_ = nullptr;
 	Fead* fead_ = nullptr;
+
+	Camera* camera = nullptr;
+	Skydorm* skydorm_ = nullptr;
 };
