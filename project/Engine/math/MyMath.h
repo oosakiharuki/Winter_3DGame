@@ -13,39 +13,44 @@
 #include <string>
 	
 //model
-	struct MaterialData {
-		std::string textureFilePath;
-		uint32_t textureIndex;
-	};
+struct MaterialData {
+	std::string textureFilePath;
+	uint32_t textureIndex;
+};
 
-	struct VertexData {
-		Vector4 position;
-		Vector2 texcoord;
-		Vector3 normal;
-	};
+struct VertexData {
+	Vector4 position;
+	Vector2 texcoord;
+	Vector3 normal;
+};
 
-	struct ModelData {
-		std::vector<VertexData> vertices;
-		MaterialData material;
-	};
+struct ModelData {
+	std::vector<VertexData> vertices;
+	MaterialData material;
+};
 
-	struct Material {
-		Vector4 color;
-		int32_t enableLighting;
-		float padding[3];
-		Matrix4x4 uvTransform;
-	};
+struct Material {
+	Vector4 color;
+	int32_t enableLighting;
+	float padding[3];
+	Matrix4x4 uvTransform;
+};
 
-	struct DirectionalLight {
-		Vector4 color;
-		Vector3 direction;
-		float intensity;
-	};
+struct DirectionalLight {
+	Vector4 color;
+	Vector3 direction;
+	float intensity;
+};
 
-	struct TransformationMatrix {
-		Matrix4x4 WVP;
-		Matrix4x4 World;
-	};
+struct TransformationMatrix {
+	Matrix4x4 WVP;
+	Matrix4x4 World;
+};
+
+struct AABB {
+	Vector3 min;
+	Vector3 max;
+};
 
 namespace MyMath {
 

@@ -9,7 +9,8 @@ public:
 	void Draw();
 
 	void OnCollision();
-	Vector3 GetPosition() { return position; };
+	AABB GetAABB();
+
 	bool IsHit()const { return isHit_; }
 	bool IsShake()const { return shakeTime; }
 	float IsTime()const { return coolTime; }

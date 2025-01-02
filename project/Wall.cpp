@@ -43,6 +43,16 @@ void Wall::Draw() {
 	object3d->Draw();
 }
 
+AABB Wall::GetAABB() {
+
+	AABB aabb;
+
+	aabb.min = { position.x - 10.0f / 2.0f,position.y - 0.5f / 2.0f,position.z - 0.5f / 2.0f };
+	aabb.max = { position.x + 10.0f / 2.0f,position.y + 0.5f / 2.0f,position.z + 0.5f / 2.0f };
+
+	return aabb;
+}
+
 void Wall::OnCollision() {
 	isHit_ = true;
 }

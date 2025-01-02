@@ -122,8 +122,6 @@ void GameScene::Update() {
 		fead_->ChangeSpriteFile("resource/FeadWin.png");
 		fead_->StartFead();	
 	}
-	
-
 
 	if (fead_->SceneChange() && isGameOver_) {
 		sceneNo = SCENE::GameOver;
@@ -158,85 +156,52 @@ void GameScene::Draw() {
 
 }
 
+bool GameScene::IsCollision(const AABB& aabb1, const AABB& aabb2) {
+	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
+		(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
+		(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)) {
+		return true;
+	}
+	return false;
+}
+
 void GameScene::CheckAllCollisions() {
-	Vector3 posA, posB;
+	AABB posA, posB;
 
 	const std::list<PlayerBullet*>& playerBullets = player->GetBullets();
 
 	//const std::list<EnemyBullet*>& enemyBullets = enemyBullets_;
 
-	// case radius
-	const float plaeyrRadius = 0.2f;
+	posA = player->GetAABB();
 
-	const float EnemyRadius = 0.2f;
+	for (Enemy* enemy_ : enemies) {		
+		posB = enemy_->GetAABB();
 
-	const float WallRadius = 1.0f;
-
-
-	for (Enemy* enemy_ : enemies) {
-		posA = player->GetPosition();
-		posB = enemy_->GetPosition();
-
-		Vector3 distance{};
-
-		distance.x = (posB.x - posA.x) * (posB.x - posA.x);
-		distance.y = (posB.y - posA.y) * (posB.y - posA.y);
-		distance.z = (posB.z - posA.z) * (posB.z - posA.z);
-
-		float L;
-
-		L = (plaeyrRadius + EnemyRadius) * (plaeyrRadius + EnemyRadius);
-
-		if (distance.x + distance.y + distance.z <= L) {
+		if (IsCollision(posA,posB)) {
 			player->OnCollision();
 			//enemy_->OnCollision();			
 		}
 	}
 
 
+	posA = wall_->GetAABB();
+
 	for (Enemy* enemy_ : enemies) {
+		posB = enemy_->GetAABB();
 
-		posA = wall_->GetPosition();
-		posB = enemy_->GetPosition();
-
-		Vector3 distance{};
-
-		distance.x = (posB.x - posA.x) * (posB.x - posA.x);
-		distance.y = (posB.y - posA.y) * (posB.y - posA.y);
-		distance.z = (posB.z - posA.z) * (posB.z - posA.z);
-
-		float L;
-
-		L = (WallRadius + EnemyRadius) * (WallRadius + EnemyRadius);
-
-		if (distance.x + distance.y + distance.z <= L) {
+		if (IsCollision(posA, posB)) {
 			wall_->OnCollision();
-			enemy_->OnCollision();			
+			enemy_->OnCollisionWall();			
 		}
 
 	}
 
-
-
-
 	for (Enemy* enemy_ : enemies) {
 		for (PlayerBullet* bullet : playerBullets) {
+			posA = enemy_->GetAABB();
+			posB = bullet->GetAABB();
 
-			posA = enemy_->GetPosition();
-			posB = bullet->GetPosition();
-
-			Vector3 distance{};
-
-			distance.x = (posB.x - posA.x) * (posB.x - posA.x);
-			distance.y = (posB.y - posA.y) * (posB.y - posA.y);
-			distance.z = (posB.z - posA.z) * (posB.z - posA.z);
-
-			float L;
-
-			L = (plaeyrRadius + EnemyRadius) * (plaeyrRadius + EnemyRadius);
-
-			if (distance.x + distance.y + distance.z <= L) {
-
+			if (IsCollision(posA, posB)) {
 				enemy_->OnCollision();
 				bullet->OnCollision();
 			}

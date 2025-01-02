@@ -15,8 +15,10 @@ public:
 	void Draw();
 
 	void OnCollision();
+	void OnCollisionWall();
+
 	bool IsDead() { return isDead_; }
-	Vector3 GetPosition() { return position; };
+	AABB GetAABB();
 
 private:
 	Transform tarnsform;

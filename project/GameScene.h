@@ -28,7 +28,8 @@ public:
 	void Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) override;
 	void Update() override;
 	void Draw() override;
-
+	
+	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 	void CheckAllCollisions();
 
 	void EnemyBorn(Vector3 position);

@@ -27,9 +27,9 @@ void  Enemy::Update() {
 		position.z -= 0.1f;
 		object3d->SetTranslate(position);
 
-		if (position.z < -5.0f) {
-			action = Action::stop;
-		}
+		//if (position.z < -5.0f) {
+		//	action = Action::stop;
+		//}
 
 
 		break;
@@ -56,6 +56,20 @@ void Enemy::Draw() {
 	object3d->Draw();
 }
 
+AABB Enemy::GetAABB() {
+
+	AABB aabb;
+
+	aabb.min = { position.x - 0.2f / 2.0f,position.y - 0.2f / 2.0f,position.z - 0.2f / 2.0f };
+	aabb.max = { position.x + 0.2f / 2.0f,position.y + 0.2f / 2.0f,position.z + 0.2f / 2.0f };
+
+	return aabb;
+}
+
 void Enemy::OnCollision() {
 	isHit = true;
+}
+
+void Enemy::OnCollisionWall() {
+	isDead_ = true;
 }
