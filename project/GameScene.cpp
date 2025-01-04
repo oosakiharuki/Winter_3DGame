@@ -23,7 +23,7 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 	ModelManager::GetInstance()->LoadModel("player.obj");
 	ModelManager::GetInstance()->LoadModel("bullet.obj");
 	ModelManager::GetInstance()->LoadModel("wall.obj");
-	
+	ModelManager::GetInstance()->LoadModel("bom.obj");
 
 	camera = new Camera();
 	Vector3 cameraRotate = { 0.25f,0.0f,0.0f };
@@ -177,9 +177,8 @@ void GameScene::CheckAllCollisions() {
 	for (Enemy* enemy_ : enemies) {		
 		posB = enemy_->GetAABB();
 
-		if (IsCollision(posA,posB)) {
-			player->OnCollision();
-			//enemy_->OnCollision();			
+		if (IsCollision(posA,posB) && !enemy_->IsBow()) {
+			player->OnCollision();			
 		}
 	}
 
@@ -201,12 +200,26 @@ void GameScene::CheckAllCollisions() {
 			posA = enemy_->GetAABB();
 			posB = bullet->GetAABB();
 
-			if (IsCollision(posA, posB)) {
+			if (IsCollision(posA, posB) && !enemy_->IsBow()) {
 				enemy_->OnCollision();
 				bullet->OnCollision();
 			}
 		}
 	}
+
+
+	//連鎖
+	//for (Enemy* enemy_ : enemies) {
+	//	posA = enemy_->GetAABB();
+	//	if (enemy_->GetParticle()) {
+	//		posB = enemy_->GetParticle()->GetAABB();
+	//		if (IsCollision(posA, posB)) {
+	//			enemy_->OnCollision();
+	//			//bullet->OnCollision();
+	//		}
+	//	}
+	//}
+
 }
 
 void GameScene::EnemyBorn(Vector3 position) {

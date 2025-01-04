@@ -150,6 +150,9 @@
     <ClCompile Include="Wall.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="DeathParticle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -276,6 +279,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathParticle.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 
 Enemy::~Enemy() {
 	delete object3d;
+	delete deathBom;
 }
 
 void Enemy::Initialize(Object3dCommon* object3dCommon, const Vector3& position) {
@@ -24,20 +25,37 @@ void  Enemy::Update() {
 	{
 	case move:
 		position = object3d->GetTranslate();
-		position.z -= 0.1f;
+		position.z -= 0.05f;
 		object3d->SetTranslate(position);
 
-		//if (position.z < -5.0f) {
-		//	action = Action::stop;
-		//}
-
+		if (position.z < 1.0f) {
+			action = Action::stop;
+		}
 
 		break;
 	case stop:
+		position = object3d->GetTranslate();
+		position.z -= 0.05f;
+		object3d->SetTranslate(position);
+
+		rotation.y += 0.3f;
+		object3d->SetRotate(rotation);
 		
+		break;
+	case bom:	
+		if (deathBom == nullptr) {
+			deathBom = new DeathParticle();
+			deathBom->Initialize(ObjCommon, position);
+		}
+		deathBom->Update();
 
+		position = object3d->GetTranslate();
+		deathBom->SetPosition(position);
 
-
+		float particleTime = deathBom->GetTimer();
+		if (particleTime < 0.0f) {
+			isDead_ = true;
+		}
 
 		break;
 	}
@@ -48,20 +66,37 @@ void  Enemy::Update() {
 	}
 
 	if (!hp) {
-		isDead_ = true;
+		action = Action::bom;
+		isBow = true;
 	}
 }
 
 void Enemy::Draw() {
-	object3d->Draw();
+	switch (action)
+	{
+	case move:
+		object3d->Draw();
+
+		break;
+	case stop:
+		object3d->Draw();
+
+		break;
+
+	case bom:
+		if (deathBom) {
+			deathBom->Draw();
+		}
+		break;
+	}
 }
 
 AABB Enemy::GetAABB() {
 
 	AABB aabb;
 
-	aabb.min = { position.x - 0.2f / 2.0f,position.y - 0.2f / 2.0f,position.z - 0.2f / 2.0f };
-	aabb.max = { position.x + 0.2f / 2.0f,position.y + 0.2f / 2.0f,position.z + 0.2f / 2.0f };
+	aabb.min = { position.x - 0.5f / 2.0f,position.y - 0.5f / 2.0f,position.z - 0.5f / 2.0f };
+	aabb.max = { position.x + 0.5f / 2.0f,position.y + 0.5f / 2.0f,position.z + 0.5f / 2.0f };
 
 	return aabb;
 }

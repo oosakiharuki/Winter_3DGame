@@ -46,8 +46,8 @@ AABB PlayerBullet::GetAABB() {
 
 	AABB aabb;
 
-	aabb.min = { position.x - 0.2f / 2.0f,position.y - 0.2f / 2.0f,position.z - 0.2f / 2.0f };
-	aabb.max = { position.x + 0.2f / 2.0f,position.y + 0.2f / 2.0f,position.z + 0.2f / 2.0f };
+	aabb.min = { position.x - 0.5f / 2.0f,position.y - 0.5f / 2.0f,position.z - 0.5f / 2.0f };
+	aabb.max = { position.x + 0.5f / 2.0f,position.y + 0.5f / 2.0f,position.z + 0.5f / 2.0f };
 
 	return aabb;
 }

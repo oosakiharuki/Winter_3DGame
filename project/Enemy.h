@@ -1,10 +1,12 @@
 #pragma once
 #include "MyMath.h"
 #include "Object3d.h"
+#include "DeathParticle.h"
 
 enum Action {
 	move,//動く
-	stop//自爆
+	stop,//突撃
+	bom//爆発
 };
 
 class Enemy {
@@ -18,7 +20,11 @@ public:
 	void OnCollisionWall();
 
 	bool IsDead() { return isDead_; }
+	bool IsBow() { return isBow; }
+
 	AABB GetAABB();
+	//DeathParticle* GetParticle() { return deathBom; }
+	//bool SetBom(bool enemyType) { enemyBom = enemyType; }
 
 private:
 	Transform tarnsform;
@@ -30,10 +36,13 @@ private:
 	Vector3 size;
 
 	Action action;
+	DeathParticle* deathBom = nullptr;
+	bool enemyBom = false;
 
 	Object3dCommon* ObjCommon = nullptr;
 
 	bool isDead_ = false;
 	bool isHit = false;
-	uint32_t hp = 10;
+	bool isBow = false;
+	uint32_t hp = 5;
 };
