@@ -74,6 +74,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	gameScene = new GameManager(spriteCommon,object3dCommon, input_);
 	gameScene->Initialize();
 
+	ModelManager::GetInstance()->LoadModel("enemy.obj");
+	ModelManager::GetInstance()->LoadModel("player.obj");
+	ModelManager::GetInstance()->LoadModel("bullet.obj");
+	ModelManager::GetInstance()->LoadModel("wall.obj");
+	ModelManager::GetInstance()->LoadModel("bom.obj");
+
 
 	//ウィンドウの×ボタンが押されるまでループ
 	while (true) {

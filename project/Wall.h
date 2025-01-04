@@ -1,12 +1,14 @@
 #pragma once
 #include "Object3d.h"
+#include "Sprite.h"
 
 class Wall {
 public:
 	~Wall();
-	void Initialize(Object3dCommon* object3dCommon, const Vector3& position);
+	void Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon, const Vector3& position);
 	void Update();
 	void Draw();
+	void Draw2D();
 
 	void OnCollision();
 	AABB GetAABB();
@@ -28,7 +30,11 @@ private:
 
 	Object3dCommon* ObjCommon = nullptr;
 
-	uint32_t hp = 3;
+	Sprite* spriteHp = nullptr;
+	Sprite* spriteBar = nullptr;
+
+
+	uint32_t hp = 6;
 	float coolTime;
 	bool isHit_ = false;
 	bool isDead_ = false;
