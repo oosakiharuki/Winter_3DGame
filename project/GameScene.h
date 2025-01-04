@@ -59,4 +59,6 @@ private:
 
 	bool isClear_ = false;
 	bool isGameOver_ = false;
+
+	Sprite* tutorial = nullptr;
 };

@@ -1,7 +1,6 @@
 #pragma once
 #include "MyMath.h"
 #include "Object3d.h"
-#include "Sprite.h"
 #include "Input.h"
 #include "PlayerBullet.h"
 
@@ -10,11 +9,10 @@
 class Player{
 public:
 	~Player();
-	void Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon,Input* input);
+	void Initialize(Object3dCommon* object3dCommon,Input* input);
 	void Update();
 	void Attack();
 	void Draw();
-	void Draw2D();
 		
 	void OnCollision();
 	std::list<PlayerBullet*> GetBullets() { return bullets_; }
@@ -41,7 +39,6 @@ private:
 
 	bool Move = true;
 
-	Sprite* sprite = nullptr;
 
 
 	std::list<PlayerBullet*> bullets_;

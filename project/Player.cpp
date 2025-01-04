@@ -3,17 +3,13 @@
 
 Player::~Player() {
 	delete object3d;
-	delete sprite;
 	for (PlayerBullet* bullet : bullets_) {
 		delete bullet;
 	}
 }
 
-void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon , Input* input){
+void Player::Initialize(Object3dCommon* object3dCommon, Input* input){
 	input_ = input;
-
-	sprite = new Sprite();
-	sprite->Initialize(spriteCommon, "resource/Hp.png");
 
 	ObjCommon = object3dCommon;
 	object3d = new Object3d();
@@ -24,7 +20,6 @@ void Player::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteComm
 
 void Player::Update() {
 	object3d->Update();
-	sprite->Update();
 	input_->Update();
 
 
@@ -163,9 +158,6 @@ void Player::Draw() {
 	}
 }
 
-void Player::Draw2D() {
-	sprite->Draw();
-}
 
 AABB Player::GetAABB() {
 

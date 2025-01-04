@@ -16,6 +16,7 @@ private:
 	SpriteCommon* spriteCommon_ = nullptr;
 	Fead* fead_ = nullptr;
 
+	Sprite* sprite_ = nullptr;
 	Camera* camera = nullptr;
 	Skydorm* skydorm_ = nullptr;
 };

@@ -1,10 +1,12 @@
 #include "Wall.h"
 
 Wall::~Wall() {
-	delete object3d;
+	delete object3d;	
+	delete spriteHp;
+	delete spriteBar;
 }
 
-void Wall::Initialize(Object3dCommon* object3dCommon, const Vector3& position) {
+void Wall::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon, const Vector3& position) {
 	ObjCommon = object3dCommon;
 	object3d = new Object3d();
 	object3d->SetModelFile("wall.obj");
@@ -13,16 +15,33 @@ void Wall::Initialize(Object3dCommon* object3dCommon, const Vector3& position) {
 	this->position = position;
 	object3d->SetTranslate(position);
 
+	spriteHp = new Sprite();
+	spriteBar = new Sprite();
+
+	spriteHp->Initialize(spriteCommon, "resource/Hp.png");
+	spriteBar->Initialize(spriteCommon, "resource/Hpbar.png");
+
+	Vector2 translate = { 0,0 };
+	translate.x += 10.0f;
+	translate.y += 10.0f;
+	spriteHp->SetPosition(translate);
+	spriteBar->SetPosition(translate);
+
 	coolTime = 0.0f;
 }
 
 void Wall::Update() {
 	object3d->Update();
+	spriteHp->Update();
+	spriteBar->Update();
 
 	coolTime -= 1.0f / 60.0f;
 
 	if (isHit_ && coolTime < 0) {
 		hp--;
+		Vector2 damage = spriteHp->GetSize();
+		damage.x -= 32.0f;
+		spriteHp->SetSize(damage);
 		coolTime = 0.5f;
 		shakeTime = true;
 	}
@@ -42,6 +61,12 @@ void Wall::Update() {
 void Wall::Draw() {
 	object3d->Draw();
 }
+
+void Wall::Draw2D() {
+	spriteHp->Draw();
+	spriteBar->Draw();
+}
+
 
 AABB Wall::GetAABB() {
 

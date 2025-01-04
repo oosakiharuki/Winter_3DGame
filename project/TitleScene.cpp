@@ -5,6 +5,7 @@ TitleScene::~TitleScene() {
 	delete fead_;
 	delete camera;
 	delete skydorm_;
+	delete sprite_;
 }
 
 void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -27,12 +28,15 @@ void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommo
 
 	skydorm_ = new Skydorm();
 	skydorm_->Initialize(object3dCommon_, camera, "skydorm.obj");
+
+	sprite_ = new Sprite();
+	sprite_->Initialize(spriteCommon_,"resource/Title.png");
 }
 
 void TitleScene::Update() {	
 	camera->Update();
 	input_->Update();
-
+	sprite_->Update();
 	skydorm_->Update();
 	fead_->Update();
 
@@ -53,5 +57,6 @@ void TitleScene::Draw() {
 
 	//UI
 	spriteCommon_->Command();
+	sprite_->Draw();
 	fead_->Draw();
 }

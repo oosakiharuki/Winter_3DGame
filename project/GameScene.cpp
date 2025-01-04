@@ -11,6 +11,7 @@ GameScene::~GameScene() {
 	delete fead_;
 	delete skydorm_;
 	delete wall_;
+	delete tutorial;
 }
 
 void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -18,12 +19,6 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 	this->input_ = input;
 	this->object3dCommon_ = objCommon;
 	this->spriteCommon_ = spriteCommon;
-
-	ModelManager::GetInstance()->LoadModel("enemy.obj");
-	ModelManager::GetInstance()->LoadModel("player.obj");
-	ModelManager::GetInstance()->LoadModel("bullet.obj");
-	ModelManager::GetInstance()->LoadModel("wall.obj");
-	ModelManager::GetInstance()->LoadModel("bom.obj");
 
 	camera = new Camera();
 	Vector3 cameraRotate = { 0.25f,0.0f,0.0f };
@@ -34,7 +29,7 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 	object3dCommon_->SetDefaultCamera(camera);
 
 	player = new Player();
-	player->Initialize(object3dCommon_, spriteCommon_, input_);
+	player->Initialize(object3dCommon_, input_);
 	
 
 	LoadEnemyPopData();
@@ -47,10 +42,14 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 
 	wall_ = new Wall();
 	Vector3 wallPos = { 0.0f,0.0f,-5.5f };
-	wall_->Initialize(object3dCommon_, wallPos);
+	wall_->Initialize(object3dCommon_, spriteCommon_, wallPos);
 
 	isClear_ = false;
 	isGameOver_ = false;
+
+	tutorial = new Sprite();
+	tutorial->Initialize(spriteCommon_, "resource/UI.png");
+
 }
 
 void GameScene::Update() {
@@ -130,6 +129,7 @@ void GameScene::Update() {
 		sceneNo = SCENE::Clear;
 	}
 
+	tutorial->Update();
 }
 
 void GameScene::Draw() {
@@ -150,7 +150,8 @@ void GameScene::Draw() {
 	//UI
 	spriteCommon_->Command();
 
-	player->Draw2D();
+	wall_->Draw2D();
+	tutorial->Draw();
 	fead_->Draw();
 
 
