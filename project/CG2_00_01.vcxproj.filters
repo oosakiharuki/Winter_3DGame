@@ -34,7 +34,16 @@
     <Filter Include="ソース ファイル\Engine\math">
       <UniqueIdentifier>{5080c25b-1a97-4ac3-bbc4-937a3146f8b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Engine\scene">
+    <Filter Include="ソース ファイル\application">
+      <UniqueIdentifier>{ce6f7256-b115-4fdf-a845-79019630c26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\application\object">
+      <UniqueIdentifier>{eb1c7054-ac10-4386-a1b8-3327fa7eafc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\application\system">
+      <UniqueIdentifier>{24fd641b-4406-4739-970f-965f4029c4c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\application\scene">
       <UniqueIdentifier>{223c9a6c-49ad-4a74-8fe5-d5039522af37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -102,9 +111,6 @@
     <ClCompile Include="Engine\input\Input.cpp">
       <Filter>ソース ファイル\Engine\input</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\math\MyMath.cpp">
       <Filter>ソース ファイル\Engine\math</Filter>
     </ClCompile>
@@ -114,44 +120,47 @@
     <ClCompile Include="Engine\3d\SrvManager.cpp">
       <Filter>ソース ファイル\Engine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\ClearScene.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\GameManager.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\GameOverScene.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="IScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\GameScene.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\IScene.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\scene\TitleScene.cpp">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\system\Fead.cpp">
+      <Filter>ソース ファイル\application\system</Filter>
     </ClCompile>
-    <ClCompile Include="Fead.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\Enemy.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\Player.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\PlayerBullet.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClCompile>
-    <ClCompile Include="Skydorm.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\Skydorm.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\Wall.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClCompile>
-    <ClCompile Include="DeathParticle.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Application\object\DeathParticle.cpp">
+      <Filter>ソース ファイル\application\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\main.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,44 +254,44 @@
     <ClInclude Include="Engine\3d\SrvManager.h">
       <Filter>ソース ファイル\Engine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\ClearScene.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\GameManager.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\GameOverScene.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="IScene.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\GameScene.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\IScene.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\scene\TitleScene.h">
+      <Filter>ソース ファイル\application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\system\Fead.h">
+      <Filter>ソース ファイル\application\system</Filter>
     </ClInclude>
-    <ClInclude Include="Fead.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\Wall.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
-    <ClInclude Include="ClearScene.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\Enemy.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScene.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\Player.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
-    <ClInclude Include="Skydorm.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\PlayerBullet.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\Skydorm.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
-    <ClInclude Include="DeathParticle.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Application\object\DeathParticle.h">
+      <Filter>ソース ファイル\application\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

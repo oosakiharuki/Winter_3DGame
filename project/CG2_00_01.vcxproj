@@ -63,7 +63,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d;$(ProjectDir)Engine\base;$(ProjectDir)Engine\math;$(ProjectDir)Engine\input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d;$(ProjectDir)Engine\base;$(ProjectDir)Engine\math;$(ProjectDir)Engine\input;$(ProjectDir)Application\object;$(ProjectDir)Application\scene;$(ProjectDir)Application\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -87,7 +87,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d;$(ProjectDir)Engine\base;$(ProjectDir)Engine\math;$(ProjectDir)Engine\input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d;$(ProjectDir)Engine\base;$(ProjectDir)Engine\math;$(ProjectDir)Engine\input;$(ProjectDir)Application\object;$(ProjectDir)Application\scene;$(ProjectDir)Application\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -97,9 +97,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClearScene.cpp" />
-    <ClCompile Include="DeathParticle.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Application\scene\ClearScene.cpp" />
+    <ClCompile Include="Application\object\DeathParticle.cpp" />
+    <ClCompile Include="Application\object\Enemy.cpp" />
     <ClCompile Include="Engine\3d\SrvManager.cpp" />
     <ClCompile Include="Engine\base\D3DResorceLeakChecker.cpp" />
     <ClCompile Include="Engine\base\DirectXCommon.cpp" />
@@ -132,21 +132,21 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\base\WinApp.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
-    <ClCompile Include="Fead.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="IScene.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBullet.cpp" />
-    <ClCompile Include="Skydorm.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Application\system\Fead.cpp" />
+    <ClCompile Include="Application\scene\GameManager.cpp" />
+    <ClCompile Include="Application\scene\GameOverScene.cpp" />
+    <ClCompile Include="Application\scene\GameScene.cpp" />
+    <ClCompile Include="Application\scene\IScene.cpp" />
+    <ClCompile Include="Application\object\Player.cpp" />
+    <ClCompile Include="Application\object\PlayerBullet.cpp" />
+    <ClCompile Include="Application\object\Skydorm.cpp" />
+    <ClCompile Include="Application\scene\TitleScene.cpp" />
+    <ClCompile Include="Application\object\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClearScene.h" />
-    <ClInclude Include="DeathParticle.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Application\scene\ClearScene.h" />
+    <ClInclude Include="Application\object\DeathParticle.h" />
+    <ClInclude Include="Application\object\Enemy.h" />
     <ClInclude Include="Engine\3d\SrvManager.h" />
     <ClInclude Include="Engine\base\D3DResorceLeakChecker.h" />
     <ClInclude Include="Engine\base\DirectXCommon.h" />
@@ -177,16 +177,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\math\Vector3.h" />
     <ClInclude Include="Engine\math\Vector4.h" />
     <ClInclude Include="Engine\base\WinApp.h" />
-    <ClInclude Include="Fead.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameOverScene.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="IScene.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBullet.h" />
-    <ClInclude Include="Skydorm.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Wall.h" />
+    <ClInclude Include="Application\system\Fead.h" />
+    <ClInclude Include="Application\scene\GameManager.h" />
+    <ClInclude Include="Application\scene\GameOverScene.h" />
+    <ClInclude Include="Application\scene\GameScene.h" />
+    <ClInclude Include="Application\scene\IScene.h" />
+    <ClInclude Include="Application\object\Player.h" />
+    <ClInclude Include="Application\object\PlayerBullet.h" />
+    <ClInclude Include="Application\object\Skydorm.h" />
+    <ClInclude Include="Application\scene\TitleScene.h" />
+    <ClInclude Include="Application\object\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />
