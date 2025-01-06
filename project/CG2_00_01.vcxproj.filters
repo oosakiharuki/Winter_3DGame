@@ -43,11 +43,11 @@
     <Filter Include="ソース ファイル\Application\object">
       <UniqueIdentifier>{ae6b62e6-7d69-4e78-a023-dffe4e875929}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Application\system">
-      <UniqueIdentifier>{6fe40b0b-289f-443f-bdee-e901a35720f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Application\scene">
       <UniqueIdentifier>{ac8c74ad-5595-485b-8ef7-beb39d155734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\scene\system">
+      <UniqueIdentifier>{6fe40b0b-289f-443f-bdee-e901a35720f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +157,7 @@
       <Filter>ソース ファイル\Application\object</Filter>
     </ClCompile>
     <ClCompile Include="Application\system\Fead.cpp">
-      <Filter>ソース ファイル\Application\system</Filter>
+      <Filter>ソース ファイル\Application\scene\system</Filter>
     </ClCompile>
     <ClCompile Include="Application\object\DeathParticle.cpp">
       <Filter>ソース ファイル\Application\object</Filter>
@@ -166,7 +166,7 @@
       <Filter>ソース ファイル\Application\object</Filter>
     </ClCompile>
     <ClCompile Include="Application\system\Audio.cpp">
-      <Filter>ソース ファイル\Application\system</Filter>
+      <Filter>ソース ファイル\Application\scene\system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,7 +291,7 @@
       <Filter>ソース ファイル\Application\object</Filter>
     </ClInclude>
     <ClInclude Include="Application\system\Fead.h">
-      <Filter>ソース ファイル\Application\system</Filter>
+      <Filter>ソース ファイル\Application\scene\system</Filter>
     </ClInclude>
     <ClInclude Include="Application\object\DeathParticle.h">
       <Filter>ソース ファイル\Application\object</Filter>
@@ -300,7 +300,7 @@
       <Filter>ソース ファイル\Application\object</Filter>
     </ClInclude>
     <ClInclude Include="Application\system\Audio.h">
-      <Filter>ソース ファイル\Application\system</Filter>
+      <Filter>ソース ファイル\Application\scene\system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

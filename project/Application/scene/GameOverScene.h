@@ -18,4 +18,6 @@ private:
 	Fead* fead_ = nullptr;
 	Camera* camera = nullptr;
 	Skydorm* skydorm_ = nullptr;
+
+	bool reTry = false;
 };

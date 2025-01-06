@@ -39,10 +39,17 @@ void GameOverScene::Update() {
 
 	if (input_->TriggerKey(DIK_SPACE)) {
 		fead_->StartFead();
+		reTry = true;
+	}
+	if (input_->TriggerKey(DIK_ESCAPE)) {
+		fead_->StartFead();
 	}
 
-	if (fead_->SceneChange()) {
+	if (fead_->SceneChange() && reTry) {
 		sceneNo = SCENE::GAME;
+	}
+	else if(fead_->SceneChange()){
+		sceneNo = SCENE::Title;
 	}
 }
 

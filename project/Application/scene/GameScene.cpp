@@ -235,7 +235,7 @@ void GameScene::EnemyBorn(Vector3 position) {
 	Enemy* enemy = new Enemy();
 	Vector3 EnemyPos = position;
 
-	enemy->Initialize(object3dCommon_, EnemyPos);
+	enemy->Initialize(object3dCommon_, EnemyPos,speed);
 	enemies.push_back(enemy);
 }
 
@@ -287,9 +287,6 @@ void GameScene::UpdateEnemyPop() {
 				getline(line_stream, word, ',');
 				float z = (float)std::atof(word.c_str());
 
-				getline(line_stream, word, ',');
-				float direction = (float)std::atof(word.c_str());//向き
-
 				EnemyBorn(Vector3(x, y, z));
 
 			}
@@ -302,6 +299,12 @@ void GameScene::UpdateEnemyPop() {
 				waitTimer = waitTime;
 
 				break; // 待機時間にif Aを使うため一度while文から抜ける
+			}
+			else if (word.find("SPEED_UP") == 0) {
+				getline(line_stream, word, ',');
+
+				float Up = (float)std::atof(word.c_str());
+				speed += Up;
 			}
 			else if (word.find("FINISH") == 0) {
 				isBornFinish = true;

@@ -6,7 +6,7 @@ Enemy::~Enemy() {
 	delete deathBom;
 }
 
-void Enemy::Initialize(Object3dCommon* object3dCommon, const Vector3& position) {
+void Enemy::Initialize(Object3dCommon* object3dCommon, const Vector3& position, float speed) {
 	
 	ObjCommon = object3dCommon;
 	object3d = new Object3d();
@@ -16,6 +16,7 @@ void Enemy::Initialize(Object3dCommon* object3dCommon, const Vector3& position) 
 	this->position = position;
 	object3d->SetTranslate(position);
 
+	this->speed = speed;
 }
 
 void  Enemy::Update() {
@@ -25,7 +26,7 @@ void  Enemy::Update() {
 	{
 	case move:
 		position = object3d->GetTranslate();
-		position.z -= 0.05f;
+		position.z -= speed;
 		object3d->SetTranslate(position);
 
 		if (position.z < 1.0f) {
@@ -35,7 +36,7 @@ void  Enemy::Update() {
 		break;
 	case stop:
 		position = object3d->GetTranslate();
-		position.z -= 0.05f;
+		position.z -= speed;
 		object3d->SetTranslate(position);
 
 		rotation.y += 0.3f;
