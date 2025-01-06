@@ -23,6 +23,142 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 #include"GameManager.h"
 
+#include <xaudio2.h>
+
+#pragma comment(lib,"xaudio2.lib")
+
+#include <fstream>
+
+struct ChunkHeader {
+	char id[4];//チャンク毎ID
+	int32_t size;//サイズ
+};
+
+struct RiffHeader {
+	ChunkHeader chunk;//RIFF
+	char type[4];//WAVE
+};
+
+struct FormatChunk {
+	ChunkHeader chunk;
+	WAVEFORMATEX fmt;
+};
+
+struct SoundData {
+	//波形フォーマット
+	WAVEFORMATEX wfex;
+	//バッファ先頭
+	BYTE* pBuffer;
+	//サイズ
+	unsigned int byfferSize;
+};
+
+SoundData SoundLoadWave(const char* filename)//string?
+{
+	//HRESULT result;
+
+	//ファイルオープン
+	//file入力ストリームのインスタンス
+	std::ifstream file;
+	//wavファイルをバイナリモードで開く
+	file.open(filename, std::ios_base::binary);
+
+	assert(file.is_open());
+
+	//wavデータ読み込み
+	//RIFFヘッダー読み込み
+	RiffHeader riff;
+	file.read((char*)&riff, sizeof(riff));
+
+	//ファイルがRIFFであるか
+	if (strncmp(riff.chunk.id, "RIFF", 4) != 0) {
+		assert(0);
+	}
+
+	//パスがWAVEであるか
+	if (strncmp(riff.type, "WAVE", 4) != 0) {
+		assert(0);
+	}
+
+	//Formatチャンク読み込み
+	FormatChunk format = {};
+
+	//チャンクヘッダー確認
+	file.read((char*)&format, sizeof(ChunkHeader));
+	if (strncmp(format.chunk.id, "fmt ", 4) != 0) {
+		assert(0);
+	}
+
+	//チャンク本体読み込み
+	assert(format.chunk.size <= sizeof(format.fmt));
+	file.read((char*)&format.fmt, format.chunk.size);
+
+	//Dataチャンク読み込み
+	ChunkHeader data;
+	file.read((char*)&data, sizeof(data));
+
+	//JUNKチャンクの場合
+	if (strncmp(data.id, "JUNK", 4) == 0) {
+		file.seekg(data.size, std::ios_base::cur);
+		file.read((char*)&data, sizeof(data));
+	}
+
+
+	data.size = mmioFOURCC('d', 'a', 't', 'a');
+
+	if (strncmp(data.id, "data", 4) != 0) {
+		if (strncmp(data.id, "LIST", 4) != 0) {
+			assert(0);
+		}
+	}
+
+	//波形データ読み込み
+	char* pBuffer = new char[data.size];
+	file.read(pBuffer, data.size);
+
+	//Waveファイルを閉じる
+	file.close();
+
+
+	//全てまとめる
+	SoundData soundData = {};
+
+	soundData.wfex = format.fmt;
+	soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
+	soundData.byfferSize = data.size;
+
+	return soundData;
+}
+
+//音声データの解放 delete
+void SoundUnload(SoundData* soundData) {
+	delete[] soundData->pBuffer; //newしたため（波形データ読み込み）
+
+	soundData->pBuffer = 0;
+	soundData->byfferSize = 0;
+	soundData->wfex = {};
+}
+
+//音声再生
+void SoundPlayWave(IXAudio2* xAudio2, const SoundData& soundData) {
+
+	HRESULT result;
+
+	IXAudio2SourceVoice* pSourceVoice = nullptr;
+	result = xAudio2->CreateSourceVoice(&pSourceVoice, &soundData.wfex);
+	assert(SUCCEEDED(result));
+
+	XAUDIO2_BUFFER buf{};
+	buf.pAudioData = soundData.pBuffer;
+	buf.AudioBytes = soundData.byfferSize;
+	buf.Flags = XAUDIO2_END_OF_STREAM;
+
+	result = pSourceVoice->SubmitSourceBuffer(&buf);
+	result = pSourceVoice->Start();
+	
+
+}
+
 //Windowsアプリのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -39,6 +175,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	dxCommon = new DirectXCommon();
 	dxCommon->SetWinApp(winApp_);
 	dxCommon->Initialize();
+
+	//audio
+	Microsoft::WRL::ComPtr<IXAudio2> xAudio2;
+
+	IXAudio2MasteringVoice* masterVoice;
+
+	HRESULT result = XAudio2Create(&xAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
+	result = xAudio2->CreateMasteringVoice(&masterVoice);
+
+	SoundData soundData1 = SoundLoadWave("resource/damage.wav");
+	SoundData soundData2 = SoundLoadWave("resource/Alarm01.wav");
+
+
+
 
 	Input* input_ = nullptr;
 	input_ = new Input();
@@ -80,6 +230,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ModelManager::GetInstance()->LoadModel("wall.obj");
 	ModelManager::GetInstance()->LoadModel("bom.obj");
 
+	int a = -1;
 
 	//ウィンドウの×ボタンが押されるまでループ
 	while (true) {
@@ -88,6 +239,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		else {
 			//ゲームの処理
+
+			if (a < 0) {
+
+				SoundPlayWave(xAudio2.Get(), soundData1);
+				SoundPlayWave(xAudio2.Get(), soundData2);
+				a++;
+			}
 
 			gameScene->Update();
 
@@ -132,6 +290,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete object3dCommon;
 	delete modelCommon;
 	delete gameScene;
+
+	xAudio2.Reset();
+	SoundUnload(&soundData1);
+	SoundUnload(&soundData2);
+
 
 	return 0;
 }
