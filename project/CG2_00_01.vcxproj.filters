@@ -165,6 +165,9 @@
     <ClCompile Include="Application\object\Skydorm.cpp">
       <Filter>ソース ファイル\Application\object</Filter>
     </ClCompile>
+    <ClCompile Include="Application\system\Audio.cpp">
+      <Filter>ソース ファイル\Application\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="Application\object\Skydorm.h">
       <Filter>ソース ファイル\Application\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\system\Audio.h">
+      <Filter>ソース ファイル\Application\system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

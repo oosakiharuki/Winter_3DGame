@@ -1,6 +1,7 @@
 #pragma once
 #include "Object3d.h"
 #include "Sprite.h"
+#include "Audio.h"
 
 class Wall {
 public:
@@ -39,4 +40,7 @@ private:
 	bool isHit_ = false;
 	bool isDead_ = false;
 	bool shakeTime = false;
+
+	Audio* audio_ = nullptr;
+	int audioHandle = 0;
 };

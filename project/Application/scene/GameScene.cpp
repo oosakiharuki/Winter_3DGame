@@ -11,7 +11,8 @@ GameScene::~GameScene() {
 	delete fead_;
 	delete skydorm_;
 	delete wall_;
-	delete tutorial;
+	delete UI;
+	delete BGM;
 }
 
 void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -47,9 +48,14 @@ void GameScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon
 	isClear_ = false;
 	isGameOver_ = false;
 
-	tutorial = new Sprite();
-	tutorial->Initialize(spriteCommon_, "resource/UI.png");
+	UI = new Sprite();
+	UI->Initialize(spriteCommon_, "resource/UI.png");
 
+	BGM = new Audio();
+	BGM->Initialize("resource/BGM.wav");
+
+	audio_ = new Audio();
+	audio_->Initialize("resource/damageE.wav");
 }
 
 void GameScene::Update() {
@@ -129,7 +135,8 @@ void GameScene::Update() {
 		sceneNo = SCENE::Clear;
 	}
 
-	tutorial->Update();
+	UI->Update();
+
 }
 
 void GameScene::Draw() {
@@ -151,10 +158,10 @@ void GameScene::Draw() {
 	spriteCommon_->Command();
 
 	wall_->Draw2D();
-	tutorial->Draw();
+	UI->Draw();
 	fead_->Draw();
 
-
+	PlayAudio();
 }
 
 bool GameScene::IsCollision(const AABB& aabb1, const AABB& aabb2) {
@@ -204,6 +211,7 @@ void GameScene::CheckAllCollisions() {
 			if (IsCollision(posA, posB) && !enemy_->IsBow()) {
 				enemy_->OnCollision();
 				bullet->OnCollision();
+				audioHandle = -1;
 			}
 		}
 	}
@@ -302,4 +310,17 @@ void GameScene::UpdateEnemyPop() {
 		}
 	}
 
+}
+
+
+void GameScene::PlayAudio() {
+	if (BGMHandle < 0) {
+		BGM->SoundPlayWave(0.02f);
+		BGMHandle++;
+	}
+
+	if (audioHandle < 0) {
+		audio_->SoundPlayWave(0.05f);
+		audioHandle++;
+	}
 }

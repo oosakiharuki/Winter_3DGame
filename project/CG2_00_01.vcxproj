@@ -100,6 +100,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\scene\ClearScene.cpp" />
     <ClCompile Include="Application\object\DeathParticle.cpp" />
     <ClCompile Include="Application\object\Enemy.cpp" />
+    <ClCompile Include="Application\system\Audio.cpp" />
     <ClCompile Include="Engine\3d\SrvManager.cpp" />
     <ClCompile Include="Engine\base\D3DResorceLeakChecker.cpp" />
     <ClCompile Include="Engine\base\DirectXCommon.cpp" />
@@ -147,6 +148,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\scene\ClearScene.h" />
     <ClInclude Include="Application\object\DeathParticle.h" />
     <ClInclude Include="Application\object\Enemy.h" />
+    <ClInclude Include="Application\system\Audio.h" />
     <ClInclude Include="Engine\3d\SrvManager.h" />
     <ClInclude Include="Engine\base\D3DResorceLeakChecker.h" />
     <ClInclude Include="Engine\base\DirectXCommon.h" />

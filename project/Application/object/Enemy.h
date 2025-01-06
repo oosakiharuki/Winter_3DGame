@@ -2,6 +2,7 @@
 #include "MyMath.h"
 #include "Object3d.h"
 #include "DeathParticle.h"
+#include "Audio.h"
 
 enum Action {
 	move,//動く
@@ -45,4 +46,5 @@ private:
 	bool isHit = false;
 	bool isBow = false;
 	uint32_t hp = 5;
+
 };

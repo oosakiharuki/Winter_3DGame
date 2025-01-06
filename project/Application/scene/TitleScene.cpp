@@ -6,6 +6,7 @@ TitleScene::~TitleScene() {
 	delete camera;
 	delete skydorm_;
 	delete sprite_;
+	delete audio_;
 }
 
 void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommon, Input* input) {
@@ -31,6 +32,9 @@ void TitleScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommo
 
 	sprite_ = new Sprite();
 	sprite_->Initialize(spriteCommon_,"resource/Title.png");
+
+	audio_ = new Audio();
+	audio_->Initialize("resource/select.wav");
 }
 
 void TitleScene::Update() {	
@@ -43,6 +47,11 @@ void TitleScene::Update() {
 
 	if (input_->TriggerKey(DIK_SPACE)) {
 		fead_->StartFead();
+		audioHandle = -1;
+	}
+	if (audioHandle < 0) {
+		audio_->SoundPlayWave(0.05f);
+		audioHandle++;
 	}
 
 	if (fead_->SceneChange()) {
