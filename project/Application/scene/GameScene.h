@@ -36,6 +36,8 @@ public:
 	void LoadEnemyPopData();
 	void UpdateEnemyPop();
 
+	void PlayAudio();
+
 private:
 	Input* input_ = nullptr;
 	Object3dCommon* object3dCommon_ = nullptr;
@@ -60,5 +62,12 @@ private:
 	bool isClear_ = false;
 	bool isGameOver_ = false;
 
-	Sprite* tutorial = nullptr;
+	Sprite* UI = nullptr;
+
+	Audio* BGM = nullptr;
+	int BGMHandle = -1;
+
+
+	Audio* audio_ = nullptr;
+	int audioHandle = 0;
 };

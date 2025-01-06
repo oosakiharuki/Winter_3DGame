@@ -4,6 +4,7 @@ Wall::~Wall() {
 	delete object3d;	
 	delete spriteHp;
 	delete spriteBar;
+	delete audio_;
 }
 
 void Wall::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon, const Vector3& position) {
@@ -28,6 +29,9 @@ void Wall::Initialize(Object3dCommon* object3dCommon, SpriteCommon* spriteCommon
 	spriteBar->SetPosition(translate);
 
 	coolTime = 0.0f;
+
+	audio_ = new Audio();
+	audio_->Initialize("resource/damageP.wav");
 }
 
 void Wall::Update() {
@@ -56,6 +60,11 @@ void Wall::Update() {
 	if (!hp) {
 		isDead_ = true;
 	}
+	if (audioHandle < 0) {
+		audio_->SoundPlayWave(0.05f);
+		audioHandle++;
+	}
+
 }
 
 void Wall::Draw() {
@@ -80,4 +89,5 @@ AABB Wall::GetAABB() {
 
 void Wall::OnCollision() {
 	isHit_ = true;
+	audioHandle = -1;
 }

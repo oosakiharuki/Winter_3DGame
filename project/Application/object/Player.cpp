@@ -6,6 +6,7 @@ Player::~Player() {
 	for (PlayerBullet* bullet : bullets_) {
 		delete bullet;
 	}
+	delete audio_;
 }
 
 void Player::Initialize(Object3dCommon* object3dCommon, Input* input){
@@ -16,6 +17,8 @@ void Player::Initialize(Object3dCommon* object3dCommon, Input* input){
 	object3d->SetModelFile("player.obj");
 	object3d->Initialize(ObjCommon);
 
+	audio_ = new Audio();
+	audio_->Initialize("resource/shot.wav");
 }
 
 void Player::Update() {
@@ -141,12 +144,18 @@ void Player::Attack() {
 		bullets_.push_back(newBullet);
 
 		distanceTime = 0.1f;
+		audioHandle = -1;
 	}
 	else {
 		distanceTime -= 1.0f / 60.0f;
 		if (distanceTime < 0) {
 			distanceTime = 0;
 		}
+	}
+	
+	if (audioHandle < 0) {
+		audio_->SoundPlayWave(0.05f);
+		audioHandle++;
 	}
 }
 

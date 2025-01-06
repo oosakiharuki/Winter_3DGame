@@ -5,6 +5,7 @@
 #include "PlayerBullet.h"
 
 //#include <list>
+#include "Audio.h"
 
 class Player{
 public:
@@ -44,4 +45,6 @@ private:
 	std::list<PlayerBullet*> bullets_;
 	float distanceTime = 0.0f;
 
+	Audio* audio_ = nullptr;
+	int audioHandle = 0;
 };

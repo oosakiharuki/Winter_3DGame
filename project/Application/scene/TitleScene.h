@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Fead.h"
 #include "Skydorm.h"
+#include "Audio.h"
 
 class TitleScene : public IScene {
 public:
@@ -19,4 +20,6 @@ private:
 	Sprite* sprite_ = nullptr;
 	Camera* camera = nullptr;
 	Skydorm* skydorm_ = nullptr;
+	Audio* audio_ = nullptr;
+	int audioHandle = 0;
 };
