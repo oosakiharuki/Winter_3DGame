@@ -317,6 +317,13 @@ void GameScene::UpdateEnemyPop() {
 
 
 void GameScene::PlayAudio() {
+
+	rePlay -= 1.0f / 60.0f;
+	if (rePlay < 0.0f) {
+		BGMHandle = -1;
+		rePlay = 61.0f;
+	}
+
 	if (BGMHandle < 0) {
 		BGM->SoundPlayWave(0.02f);
 		BGMHandle++;

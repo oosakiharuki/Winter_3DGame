@@ -47,11 +47,11 @@ void TitleScene::Update() {
 
 	if (input_->TriggerKey(DIK_SPACE)) {
 		fead_->StartFead();
-		audioHandle = -1;
+		audioHandle -= 1;
 	}
 	if (audioHandle < 0) {
 		audio_->SoundPlayWave(0.05f);
-		audioHandle++;
+		audioHandle += 10;
 	}
 
 	if (fead_->SceneChange()) {

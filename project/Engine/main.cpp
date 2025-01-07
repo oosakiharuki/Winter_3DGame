@@ -41,20 +41,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	dxCommon->SetWinApp(winApp_);
 	dxCommon->Initialize();
 
-	//audio
-	//Microsoft::WRL::ComPtr<IXAudio2> xAudio2;
-
-	//IXAudio2MasteringVoice* masterVoice;
-
-	//HRESULT result = XAudio2Create(&xAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
-	//result = xAudio2->CreateMasteringVoice(&masterVoice);
-
-	//SoundData soundData1 = SoundLoadWave("resource/damage.wav");
-	//SoundData soundData2 = SoundLoadWave("resource/Alarm01.wav");
-
-
-
-
 	Input* input_ = nullptr;
 	input_ = new Input();
 	input_->Initialize(winApp_);
@@ -105,13 +91,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		else {
 			//ゲームの処理
 
-			//if (a < 0) {
-
-			//	SoundPlayWave(xAudio2.Get(), soundData1);
-			//	SoundPlayWave(xAudio2.Get(), soundData2);
-			//	a++;
-			//}
-
 			gameScene->Update();
 
 
@@ -155,11 +134,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete object3dCommon;
 	delete modelCommon;
 	delete gameScene;
-
-	//xAudio2.Reset();
-	//SoundUnload(&soundData1);
-	//SoundUnload(&soundData2);
-
 
 	return 0;
 }

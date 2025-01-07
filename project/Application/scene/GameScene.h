@@ -67,7 +67,7 @@ private:
 
 	Audio* BGM = nullptr;
 	int BGMHandle = -1;
-
+	float rePlay = 61.0f;
 
 	Audio* audio_ = nullptr;
 	int audioHandle = 0;

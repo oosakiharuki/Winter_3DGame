@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Fead.h"
 #include "Skydorm.h"
+#include "Audio.h"
 
 class ClearScene : public IScene {
 public:
@@ -18,4 +19,7 @@ private:
 	Fead* fead_ = nullptr;
 	Camera* camera = nullptr;
 	Skydorm* skydorm_ = nullptr;
+
+	Audio* audio_ = nullptr;
+	int audioHandle = 0;
 };
