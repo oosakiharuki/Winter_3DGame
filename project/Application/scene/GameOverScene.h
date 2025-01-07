@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Fead.h"
 #include "Skydorm.h"
+#include "Audio.h"
 
 class GameOverScene : public IScene {
 public:
@@ -18,4 +19,12 @@ private:
 	Fead* fead_ = nullptr;
 	Camera* camera = nullptr;
 	Skydorm* skydorm_ = nullptr;
+
+	bool reTry = false;
+	
+	Audio* audioRetry = nullptr;
+	Audio* audioBack = nullptr;
+
+	int audioHandle1 = 0;
+	int audioHandle2 = 0;
 };

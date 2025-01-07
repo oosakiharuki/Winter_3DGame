@@ -53,6 +53,7 @@ private:
 	bool WaitFlag = false;
 	int32_t waitTimer;
 	bool isBornFinish = false;
+	float speed = 0.05f;
 
 	Fead* fead_ = nullptr;
 	Skydorm* skydorm_ = nullptr;
@@ -66,7 +67,7 @@ private:
 
 	Audio* BGM = nullptr;
 	int BGMHandle = -1;
-
+	float rePlay = 61.0f;
 
 	Audio* audio_ = nullptr;
 	int audioHandle = 0;

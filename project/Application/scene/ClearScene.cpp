@@ -28,6 +28,9 @@ void ClearScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCommo
 
 	skydorm_ = new Skydorm();
 	skydorm_->Initialize(object3dCommon_, camera, "skydorm.obj");
+
+	audio_ = new Audio();
+	audio_->Initialize("resource/select.wav");
 }
 
 void ClearScene::Update() {
@@ -40,10 +43,16 @@ void ClearScene::Update() {
 	if (input_->TriggerKey(DIK_SPACE)) {
 		fead_->ChangeSpriteFile("resource/Fead.png");
 		fead_->StartFead();
+		audioHandle -= 1;
 	}
 
 	if (fead_->SceneChange()) {
 		sceneNo = SCENE::Title;
+	}
+
+	if (audioHandle < 0) {
+		audio_->SoundPlayWave(0.05f);
+		audioHandle += 10;
 	}
 }
 

@@ -28,6 +28,12 @@ void GameOverScene::Initialize(SpriteCommon* spriteCommon, Object3dCommon* objCo
 
 	skydorm_ = new Skydorm();
 	skydorm_->Initialize(object3dCommon_, camera, "skydorm.obj");
+
+	audioRetry = new Audio();
+	audioRetry->Initialize("resource/select.wav");
+
+	audioBack = new Audio();
+	audioBack->Initialize("resource/back.wav");
 }
 
 void GameOverScene::Update() {
@@ -39,11 +45,31 @@ void GameOverScene::Update() {
 
 	if (input_->TriggerKey(DIK_SPACE)) {
 		fead_->StartFead();
+		reTry = true;
+		audioHandle1  -=1;
+	}
+	if (input_->TriggerKey(DIK_ESCAPE)) {
+		fead_->StartFead();
+		audioHandle2  -=1;
 	}
 
-	if (fead_->SceneChange()) {
+	if (fead_->SceneChange() && reTry) {
 		sceneNo = SCENE::GAME;
 	}
+	else if(fead_->SceneChange()){
+		sceneNo = SCENE::Title;
+	}
+
+	if (audioHandle1 < 0) {
+		audioRetry->SoundPlayWave(0.05f);
+		audioHandle1 += 10;
+	}
+	
+	if (audioHandle2 < 0) {
+		audioBack->SoundPlayWave(0.05f);
+		audioHandle2 += 10;
+	}
+
 }
 
 void GameOverScene::Draw() {

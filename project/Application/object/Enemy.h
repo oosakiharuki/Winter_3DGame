@@ -13,7 +13,7 @@ enum Action {
 class Enemy {
 public:	
 	~Enemy();
-	void Initialize(Object3dCommon* object3dCommon,const Vector3& position);
+	void Initialize(Object3dCommon* object3dCommon,const Vector3& position,float speed);
 	void Update();
 	void Draw();
 
@@ -35,6 +35,8 @@ private:
 	Vector3 position;
 	Vector3 rotation;
 	Vector3 size;
+
+	float speed = 0.0f;
 
 	Action action;
 	DeathParticle* deathBom = nullptr;

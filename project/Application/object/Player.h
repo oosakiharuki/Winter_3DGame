@@ -47,4 +47,7 @@ private:
 
 	Audio* audio_ = nullptr;
 	int audioHandle = 0;
+
+	Audio* audio2_ = nullptr;
+	int audioHandle2 = 0;
 };
