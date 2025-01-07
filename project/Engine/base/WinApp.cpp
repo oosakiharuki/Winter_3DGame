@@ -33,7 +33,7 @@ void WinApp::Initialize() {
 
 	hwnd = CreateWindow(
 		wc.lpszClassName,
-		L"CG2",
+		L"LE2C_05_オオサキ_ハルキ_撃退UFO",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,

@@ -186,7 +186,7 @@ void GameScene::CheckAllCollisions() {
 		posB = enemy_->GetAABB();
 
 		if (IsCollision(posA,posB) && !enemy_->IsBow()) {
-			player->OnCollision();			
+			player->OnCollision();	
 		}
 	}
 

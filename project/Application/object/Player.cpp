@@ -19,6 +19,9 @@ void Player::Initialize(Object3dCommon* object3dCommon, Input* input){
 
 	audio_ = new Audio();
 	audio_->Initialize("resource/shot.wav");
+
+	audio2_ = new Audio();
+	audio2_->Initialize("resource/collide.wav");
 }
 
 void Player::Update() {
@@ -126,6 +129,10 @@ void Player::Update() {
 	});
 	
 
+	if (audioHandle2 < 0) {
+		audio2_->SoundPlayWave(0.05f);
+		audioHandle2++;
+	}
 }
 
 void Player::Attack() {
@@ -180,5 +187,8 @@ AABB Player::GetAABB() {
 
 
 void Player::OnCollision() {
+	if (Move) {
+		audioHandle2 = -1;
+	}
 	Move = false;
 }
