@@ -6,10 +6,12 @@
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 
+#ifdef _DEBUG
 #include"externals/imgui/imgui.h"
 #include"externals/imgui/imgui_impl_dx12.h"
 #include"externals/imgui/imgui_impl_win32.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 #include <thread>
 
@@ -520,6 +522,7 @@ void DirectXCommon::DXC() {
 }
 
 void DirectXCommon::ImGui() {
+#ifdef _DEBUG
 	//ImGui初期化
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -529,7 +532,7 @@ void DirectXCommon::ImGui() {
 		rtvDesc.Format, srvDescriptorHeap.Get(),
 		srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
 		srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-
+#endif
 }
 
 
@@ -584,9 +587,10 @@ void DirectXCommon::PostDraw() {
 	//　これから書き込みバックバッファのインデックスを取得
 	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
 
+#ifdef _DEBUG
 	//実際のcommandListのImGui描画コマンドを挟む
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList.Get());
-
+#endif
 
 	//画面に描く処理はすべて終わり、画面に映すので、状況をそうい
 	//今回はResourceTargetからPresentにする

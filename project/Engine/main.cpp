@@ -2,13 +2,14 @@
 #include<format>
 
 #include<cassert>
-
+#ifdef _DEBUG
 #include <dxgidebug.h>
 
 #include"externals/imgui/imgui.h"
 #include"externals/imgui/imgui_impl_dx12.h"
 #include"externals/imgui/imgui_impl_win32.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 #pragma comment(lib,"dxguid.lib")
 
@@ -94,6 +95,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			gameScene->Update();
 
 
+#ifdef _DEBUG
 			ImGui_ImplDX12_NewFrame();
 			ImGui_ImplWin32_NewFrame();
 			ImGui::NewFrame();
@@ -104,6 +106,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			//ImGuiの内部コマンド
 			ImGui::Render();
+#endif
 
 			//描画開始
 			dxCommon->ProDraw();
@@ -115,9 +118,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 	}
 
+#ifdef _DEBUG
 	ImGui_ImplDX12_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+#endif
 
 	delete input_;
 	winApp_->Finalize();
